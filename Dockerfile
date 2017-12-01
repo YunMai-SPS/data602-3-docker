@@ -10,12 +10,12 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN apk update
-RUN apk add musl-dev wget git build-base
+#RUN apk update
+#RUN apk add musl-dev wget git build-base
 
 # Numpy
 RUN pip install cython
-RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+#RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 RUN pip install numpy 
 
 # TA-Lib
