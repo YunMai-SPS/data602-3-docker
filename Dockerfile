@@ -1,4 +1,7 @@
-FROM python:3
+FROM python:3.6-alpine
+
+RUN apk update
+RUN apk add musl-dev wget git build-base
 
 # Numpy
 RUN pip install cython
@@ -14,13 +17,15 @@ RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
   make install
 RUN git clone https://github.com/mrjbq7/ta-lib.git /ta-lib-py && cd ta-lib-py && python setup.py install
 
+RUN apk del musl-dev wget git build-base
+
 COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
-RUN git clone https://github.com/YunMai-SPS/data602-assignment3.git data602-assignment3
+RUN git clone https://github.com/YunMai-SPS/data602-3.git data602-3
 EXPOSE 5000
 
-CMD [ "python", "data602-assignment3/trade_analytics_app.py" ]
+CMD [ "python", "data602-3/trade_analytics_app.py" ]
 
 
 
