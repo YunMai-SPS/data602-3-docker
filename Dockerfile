@@ -1,7 +1,7 @@
-FROM python:3.6-alpine
+FROM python:3 
 
-RUN apk update
-RUN apk add musl-dev wget git build-base
+# Make sure package is up to date
+RUN apt-get update
 
 # Numpy
 RUN pip install cython
