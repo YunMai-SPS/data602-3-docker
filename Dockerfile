@@ -1,10 +1,10 @@
 FROM python:3 
 
 # Make sure package is up to date
-RUN apt-get update
+# RUN apt-get update
 
 # Install dependencies
-RUN apt-get install -y build-essential openssl libssl-dev pkg-config python 
+# RUN apt-get install -y build-essential openssl libssl-dev pkg-config python 
 
 COPY requirements.txt ./
 
