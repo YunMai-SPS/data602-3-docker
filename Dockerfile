@@ -17,7 +17,6 @@ RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
   make install
 RUN git clone https://github.com/mrjbq7/ta-lib.git /ta-lib-py && cd ta-lib-py && python setup.py install
 
-RUN apk del musl-dev wget git build-base
 
 COPY requirements.txt ./
 
