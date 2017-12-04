@@ -1,7 +1,7 @@
 FROM python:3
 
 # Create directory 
-RUN mkdir -p /dir
+RUN mkdir -p /dir/subdir
 
 # Make sure package is up to date
 RUN apt-get update
@@ -24,3 +24,8 @@ RUN git clone https://github.com/YunMai-SPS/data602-assignment3.git data602-assi
 EXPOSE 5000
 
 CMD [ "python", "data602-assignment3/trade_analytics_app.py" ]
+
+
+
+
+
