@@ -1,37 +1,26 @@
-FROM python:3 
+FROM python:3
+
+# Create directory 
+RUN mkdir -p /dir
 
 # Make sure package is up to date
-# RUN apt-get update
+RUN apt-get update
 
 # Install dependencies
-# RUN apt-get install -y build-essential openssl libssl-dev pkg-config python 
+RUN apt-get install -y build-essential openssl libssl-dev pkg-config python 
+
+# Install ta-lib-0.4.0
+WORKDIR /dir
+RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+RUN tar -xzf ta-lib-0.4.0-src.tar.gz
+WORKDIR /dir/ta-lib
+RUN ./configure --prefix=/usr && make && make install
+WORKDIR /dir
 
 COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
-
-#RUN apk update
-#RUN apk add musl-dev wget git build-base
-
-# Numpy
-RUN pip install cython
-#RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-RUN pip install numpy 
-
-# TA-Lib
-RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
-  tar -xvzf ta-lib-0.4.0-src.tar.gz && \
-  cd ta-lib/ && \
-  ./configure --prefix=/usr && \
-  make && \
-  make install
-RUN git clone https://github.com/mrjbq7/ta-lib.git /ta-lib-py && cd ta-lib-py && python setup.py install
-
-RUN git clone https://github.com/YunMai-SPS/data602-3.git data602-3
+RUN git clone https://github.com/YunMai-SPS/data602-assignment3.git data602-assignment3
 EXPOSE 5000
 
-CMD [ "python", "data602-3/trade_analytics_app.py" ]
-
-
-
-
+CMD [ "python", "data602-assignment3/trade_analytics_app.py" ]
